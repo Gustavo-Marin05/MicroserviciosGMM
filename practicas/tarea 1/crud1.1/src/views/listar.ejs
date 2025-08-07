@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Productos</title>
+  </head>
+  <body>
+    <h2>Lista de Productos</h2>
+
+    <table style="border-collapse: collapse" border="1">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>fecha_nacimiento</th>
+          <th>direccion</th>
+          <th>celular</th>
+          <th>correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% usuarios.forEach(usuario => { %>
+        <tr>
+          <td><%= usuario.nombres %></td>
+          <td><%= usuario.apellidos %></td>
+          <td><%= usuario.fecha_nacimiento %></td>
+          <td><%= usuario.direccion %></td>
+          <td><%= usuario.celular %></td>
+          <td><%= usuario.correo %></td>
+          <td>
+            <a href="/edit/<%= usuario.id %>">Editar</a>
+            <a href="/user/<%= usuario.id %>">Eliminar</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <a href="/add">agregar</a>
+  </body>
+</html>

@@ -4,38 +4,98 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agregar Usuario</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #007BFF;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
-    <h2>Agregar Usuario</h2>
-
     <form action="/add" method="POST">
+      <h2>Agregar Usuario</h2>
+
       <label for="nombres">Nombre:</label>
-      <input type="text" id="nombres" name="nombres" required /><br /><br />
+      <input type="text" id="nombres" name="nombres" required />
 
       <label for="apellidos">Apellido:</label>
-      <input type="text" id="apellidos" name="apellidos" required /><br /><br />
+      <input type="text" id="apellidos" name="apellidos" required />
 
       <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-      <input
-        type="date"
-        id="fecha_nacimiento"
-        name="fecha_nacimiento"
-        required
-      /><br /><br />
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required />
 
       <label for="direccion">Dirección:</label>
-      <input type="text" id="direccion" name="direccion" required /><br /><br />
+      <input type="text" id="direccion" name="direccion" required />
 
       <label for="celular">Celular:</label>
-      <input type="text" id="celular" name="celular" required /><br /><br />
+      <input type="text" id="celular" name="celular" required />
 
       <label for="correo">Correo:</label>
-      <input type="email" id="correo" name="correo" required /><br /><br />
+      <input type="email" id="correo" name="correo" required />
 
       <button type="submit">Guardar</button>
+      <a href="/user">Volver a la lista</a>
     </form>
-
-    <br />
-    <a href="/">Volver a la lista</a>
   </body>
 </html>

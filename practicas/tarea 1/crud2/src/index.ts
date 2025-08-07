@@ -21,7 +21,7 @@ AppDataSource.initialize()
 
 
     // OBTENEMOS TODOS LOS USUARIOS EN UNA TABLA
-    app.get("/users", async (req, res) => {
+    app.get("/user", async (req, res) => {
       const usuarios = await AppDataSource.manager.find(Usuarios);
       res.render("listar", { usuarios });
     });
@@ -49,7 +49,7 @@ AppDataSource.initialize()
 
         await AppDataSource.manager.save(usuarios);
 
-        res.redirect("/users");
+        res.redirect("/user");
       } catch (error) {
         res.status(500).send("Error al crear el usuario");
       }
@@ -63,7 +63,7 @@ AppDataSource.initialize()
         const usuarios = await AppDataSource.manager.delete(Usuarios, id)
         if (!usuarios) return res.status(400).send("Usuario no encontrado");
 
-        res.redirect('/users')
+        res.redirect('/user')
       } catch (error) {
         res.status(500).send("Error al eliminar usuario");
       }
@@ -108,7 +108,7 @@ AppDataSource.initialize()
           return res.status(404).send("Usuario no encontrado.");
         }
 
-        res.redirect("/users");
+        res.redirect("/user");
       } catch (err) {
         console.error("Error al actualizar usuario:", err);
         res.status(500).send("Error al actualizar el usuario.");

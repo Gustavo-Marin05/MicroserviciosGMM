@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Tarea</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 25px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Editar Tarea</h2>
+
+      <form action="/task/edit/<%= tarea._id %>" method="POST">
+        <label for="titulo">Título:</label>
+        <input
+          type="text"
+          id="titulo"
+          name="titulo"
+          value="<%= tarea.titulo %>"
+          required
+        />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          rows="4"
+          required
+        ><%= tarea.descripcion %></textarea>
+
+        <label for="fecha_limite">Fecha límite:</label>
+        <input
+          type="date"
+          id="fecha_limite"
+          name="fecha_limite"
+          value="<%= tarea.fecha_limite.toISOString().split('T')[0] %>"
+          required
+        />
+
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado" required>
+          <option value="pendiente" <%= tarea.estado === 'pendiente' ? 'selected' : '' %>>Pendiente</option>
+          <option value="en progreso" <%= tarea.estado === 'en progreso' ? 'selected' : '' %>>En progreso</option>
+          <option value="completado" <%= tarea.estado === 'completado' ? 'selected' : '' %>>Completada</option>
+        </select>
+
+        <button type="submit">Guardar cambios</button>
+      </form>
+
+      <a href="/task">Volver a la lista</a>
+    </div>
+  </body>
+</html>

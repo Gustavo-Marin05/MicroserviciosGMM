@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Usuarios</title>
+    <title>Lista de Tareas</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -20,18 +20,17 @@
         width: 100%;
         border-collapse: collapse;
         background-color: #fff;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
       }
 
-      th,
-      td {
+      th, td {
         padding: 10px;
         text-align: left;
         border-bottom: 1px solid #ccc;
       }
 
       th {
-        background-color: #007bff;
+        background-color: #007BFF;
         color: white;
       }
 
@@ -41,7 +40,7 @@
 
       a {
         margin-right: 10px;
-        color: #007bff;
+        color: #007BFF;
         text-decoration: none;
       }
 
@@ -65,35 +64,34 @@
     </style>
   </head>
   <body>
-    <h2>Lista de Usuarios</h2>
+    <h2>Lista de Tareas</h2>
 
     <table>
       <thead>
         <tr>
-          <th>id</th>
-          <th>Nombre</th>
-          <th>Correo</th>
-          <th>Fecha de registro</th>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Fecha limite</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <% usuarios.forEach(usuario => { %>
+        <% tareas.forEach(tarea => { %>
         <tr>
-          <td><%= usuario.id %></td>
-          <td><%= usuario.nombres %></td>
-          <td><%= usuario.correo %></td>
-          <td><%= usuario.fecha_registro %></td>
-          
+          <td><%= tarea.titulo %></td>
+          <td><%= tarea.descripcion %></td>
+          <td><%= tarea.estado%></td>
+          <td><%= tarea.fecha_limite %></td>
           <td>
-            <a href="/edit/<%= usuario.id %>">Editar</a>
-            <a href="/user/<%= usuario.id %>">Eliminar</a>
+            <a href="/task/edit/<%= tarea._id %>">Editar</a>
+            <a href="/task/delete/<%= tarea._id %>">Eliminar</a>
           </td>
         </tr>
         <% }) %>
       </tbody>
     </table>
 
-    <a class="add-button" href="/add">Agregar Usuario</a>
+    <a class="add-button" href="/task/add">Agregar Tarea</a>
   </body>
 </html>

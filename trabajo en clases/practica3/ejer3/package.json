@@ -1,5 +1,5 @@
 {
-  "name": "ejer2",
+  "name": "ejer3",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
+    
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,9 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mysql2": "^3.14.3",
+    "mongoose": "^8.18.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }

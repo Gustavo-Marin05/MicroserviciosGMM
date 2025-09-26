@@ -1,0 +1,41 @@
+npm i express mysql2 ejs
+
+npm init -y
+
+npm i express mysql2 ejs
+
+
+npm install --save-dev nodemon
+
+o tambien
+
+npm install nodemon -D
+
+
+
+
+npm i express ejs mongoose
+
+
+
+
+
+dentro del dockerfile
+
+FROM node:20-bullseye
+
+WORKDIR /src/index
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["node", "src/index.js"]
+
+
+
+
+
+docker build -t nombre .

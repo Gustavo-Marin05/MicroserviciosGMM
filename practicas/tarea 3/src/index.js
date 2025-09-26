@@ -15,8 +15,14 @@ app.set("views", path.join(__dirname, "views"));
 
 // CONEXIÓN A LA BASE DE DATOS
 // CONEXIÓN A LA BASE DE DATOS
+
+//esto en caso de que uses docker
+//mongodb://host.docker.internal:27017/Databases 
+
+//en caso de que uses localmente
+//mongodb://localhost:27017/Databases
 mongoose
-  .connect("mongodb://host.docker.internal:27017/Databases", {
+  .connect("mongodb://localhost:27017/Databases", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

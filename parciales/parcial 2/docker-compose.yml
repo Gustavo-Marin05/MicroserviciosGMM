@@ -1,0 +1,105 @@
+
+services:
+  # Base de datos MySQL para autenticación
+  mysql:
+    image: mysql:8
+    container_name: auth-exa-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: authdb
+      MYSQL_USER: authuser
+      MYSQL_PASSWORD: authpass
+    ports:
+      - "3306:3306"
+
+  
+  auth-typeorm:
+    build: ./auth-typeorm
+    container_name: auth-type-orm
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: authuser
+      DB_PASSWORD: authpass
+      DB_NAME: authdb
+      JWT_SECRET: mi_secreto_demo
+      RABBITMQ_HOST: rabbitmq
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mysql
+
+  # Base de datos MongoDB para vehículos
+  mongodb:
+    image: mongo:7.0
+    container_name: vehiculos_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: vehiculos_db
+
+  # Servicio de vehículos con Python/Flask
+  vehicle-service:
+    build: ./vehiculos
+    container_name: vehicle_service
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/vehiculos_db
+    depends_on:
+      - mongodb
+    volumes:
+      - ./vehiculos:/app
+#este es el api gateway
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - AUTH_SERVICE_URL=http://auth-typeorm:4000
+      - VEHICLE_SERVICE_URL=http://vehicle-service:5000
+      - ENVIOS_SERVICE_URL=http://envios-service:4001
+      - JWT_SECRET=mi_secreto_demo
+    depends_on:
+      - auth-typeorm
+      - vehicle-service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+#servio de nginx
+
+  mysql-envios:
+    image: mysql:8
+    container_name: envios-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: enviosdb
+      MYSQL_USER: envuser
+      MYSQL_PASSWORD: envpass
+    ports:
+      - "3307:3306"
+
+
+  # --- NUEVO: Servicio de Envíos (GraphQL + Node.js) ---
+  envios-service:
+    build: ./envios
+    container_name: envios_service
+    restart: always
+    depends_on:
+      - mysql-envios
+    environment:
+      MYSQL_HOST: mysql-envios
+      MYSQL_USER: envuser
+      MYSQL_PASSWORD: envpass
+      MYSQL_DATABASE: enviosdb
+      PORT: 4001
+    ports:
+      - "4001:4001"
+
+
+volumes:
+  mongo_data:
